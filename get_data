@@ -1,0 +1,33 @@
+def get_data(feed):
+
+    bl_res = False
+    response = None
+    url = f'https://global.flashscore.ninja/2/x/feed/{feed}'
+
+    while not bl_res:
+
+        sleep_time = np.random.randint(2, 6)
+        time.sleep(sleep_time)
+
+        try:
+            response = requests.get(url=url, headers={"x-fsign": "SW9D1eZo"})
+            bl_res = True
+        except:
+            pass
+            # print('произошла ошибка, но все збс')
+
+
+    data = response.text.split('¬')
+
+    data_list = [{}]
+
+    for item in data:
+        key = item.split('÷')[0]
+        value = item.split('÷')[-1]
+
+        if '~' in key:
+            data_list.append({key: value})
+        else:
+            data_list[-1].update({key: value})
+
+    return data_list
