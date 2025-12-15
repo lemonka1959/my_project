@@ -2,7 +2,7 @@ import json
 import requests
 import pandas as pd
 import numpy as np
-import time as time_lb
+import time as time
 
 
 
@@ -38,7 +38,7 @@ def get_data(feed):
     while not bl_res:
 
         sleep_time = np.random.randint(2, 6)
-        time_lb.sleep(sleep_time)
+        time.sleep(sleep_time)
         url = f'https://global.flashscore.ninja/2/x/feed/{feed}'
 
         try:
@@ -229,3 +229,4 @@ def initialize_data()(num):
     df = pd.DataFrame(feeds_match)
     df.to_excel('all_feeds_' + names_standings[num].replace(' ', '_') + '.xlsx', index=False)
     print(names_standings[num] + ' finish get feeds match\n')
+
